@@ -1211,21 +1211,6 @@ Please see the [vhost_traffic_status_dump](#vhost_traffic_status_dump) directive
  http://example.org/status.html
  ```
 
-### To customize before the module installed
-1. Modify `share/status.template.html` (Do not change `{{uri}}` string)
-
-2. Recreate the `ngx_http_vhost_traffic_status_module_html.h` as follows:
- ```
- shell> cd util
- shell> ./tplToDefine.sh ../share/status.template.html > ../src/ngx_http_vhost_traffic_status_module_html.h
- ```
-
-3. Add the module to the build configuration by adding
-  `--add-module=/path/to/nginx-module-vts`
-
-4. Build the nginx binary.
-
-5. Install the nginx binary.
 
 
 ## Directives

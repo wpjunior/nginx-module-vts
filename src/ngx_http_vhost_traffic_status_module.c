@@ -46,15 +46,6 @@ static ngx_int_t ngx_http_vhost_traffic_status_init_worker(ngx_cycle_t *cycle);
 static void ngx_http_vhost_traffic_status_exit_worker(ngx_cycle_t *cycle);
 
 
-static ngx_conf_enum_t  ngx_http_vhost_traffic_status_display_format[] = {
-    { ngx_string("json"), NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_JSON },
-    { ngx_string("html"), NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_HTML },
-    { ngx_string("jsonp"), NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_JSONP },
-    { ngx_string("prometheus"), NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_PROMETHEUS },
-    { ngx_null_string, 0 }
-};
-
-
 static ngx_conf_enum_t  ngx_http_vhost_traffic_status_average_method_post[] = {
     { ngx_string("AMM"), NGX_HTTP_VHOST_TRAFFIC_STATUS_AVERAGE_METHOD_AMM },
     { ngx_string("WMA"), NGX_HTTP_VHOST_TRAFFIC_STATUS_AVERAGE_METHOD_WMA },
@@ -169,20 +160,6 @@ static ngx_command_t ngx_http_vhost_traffic_status_commands[] = {
       ngx_http_vhost_traffic_status_display,
       0,
       0,
-      NULL },
-
-    { ngx_string("vhost_traffic_status_display_format"),
-      NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
-      ngx_conf_set_enum_slot,
-      NGX_HTTP_LOC_CONF_OFFSET,
-      offsetof(ngx_http_vhost_traffic_status_loc_conf_t, format),
-      &ngx_http_vhost_traffic_status_display_format },
-
-    { ngx_string("vhost_traffic_status_display_jsonp"),
-      NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
-      ngx_conf_set_str_slot,
-      NGX_HTTP_LOC_CONF_OFFSET,
-      offsetof(ngx_http_vhost_traffic_status_loc_conf_t, jsonp),
       NULL },
 
     { ngx_string("vhost_traffic_status_display_sum_key"),
@@ -1000,7 +977,6 @@ ngx_http_vhost_traffic_status_create_loc_conf(ngx_conf_t *cf)
     conf->limit_check_duplicate = NGX_CONF_UNSET;
 
     conf->start_msec = ngx_http_vhost_traffic_status_current_msec();
-    conf->format = NGX_CONF_UNSET;
     conf->average_method = NGX_CONF_UNSET;
     conf->average_period = NGX_CONF_UNSET_MSEC;
     conf->histogram_buckets = NGX_CONF_UNSET_PTR;
@@ -1103,10 +1079,6 @@ ngx_http_vhost_traffic_status_merge_loc_conf(ngx_conf_t *cf, void *parent, void 
     ngx_conf_merge_value(conf->limit_check_duplicate, prev->limit_check_duplicate, 1);
     ngx_conf_merge_ptr_value(conf->filter_vars, prev->filter_vars, NULL);
 
-    ngx_conf_merge_value(conf->format, prev->format,
-                         NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_JSON);
-    ngx_conf_merge_str_value(conf->jsonp, prev->jsonp,
-                             NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_JSONP);
     ngx_conf_merge_str_value(conf->sum_key, prev->sum_key,
                              NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_SUM_KEY);
     ngx_conf_merge_value(conf->average_method, prev->average_method,
