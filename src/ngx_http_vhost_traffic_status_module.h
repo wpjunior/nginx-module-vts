@@ -255,11 +255,6 @@ typedef struct {
     ngx_str_t                               shm_name;
     ssize_t                                 shm_size;
 
-    ngx_flag_t                              dump;
-    ngx_str_t                               dump_file;
-    ngx_msec_t                              dump_period;
-    ngx_event_t                             dump_event;
-
     ngx_flag_t                              measure_all_status_codes;
     ngx_array_t                             *measure_status_codes;
 } ngx_http_vhost_traffic_status_ctx_t;

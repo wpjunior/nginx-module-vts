@@ -54,7 +54,6 @@ Table of Contents
 * [Directives](#directives)
   * [vhost_traffic_status](#vhost_traffic_status)
   * [vhost_traffic_status_zone](#vhost_traffic_status_zone)
-  * [vhost_traffic_status_dump](#vhost_traffic_status_dump)
   * [vhost_traffic_status_display](#vhost_traffic_status_display)
   * [vhost_traffic_status_display_format](#vhost_traffic_status_display_format)
   * [vhost_traffic_status_display_jsonp](#vhost_traffic_status_display_jsonp)
@@ -1147,26 +1146,6 @@ See the following directives:
   * [vhost_traffic_status_bypass_stats](#vhost_traffic_status_bypass_stats)
 
 
-### To maintain statistics data permanently
-
-```Nginx
-http {
-    vhost_traffic_status_zone;
-    vhost_traffic_status_dump /var/log/nginx/vts.db;
-
-    ...
-
-    server {
-
-        ...
-
-    }
-}
-```
-
-* The `vhost_traffic_status_dump` directive maintains statistics data permanently
-even if system has been rebooted or nginx has been restarted.
-Please see the [vhost_traffic_status_dump](#vhost_traffic_status_dump) directive for detailed usage.
 
 ## Customizing
 ### To customize after the module installed
@@ -1250,18 +1229,6 @@ If you use `vhost_traffic_status_filter_by_set_key` directive, set it as follows
 * If the message(*`"ngx_slab_alloc() failed: no memory in vhost_traffic_status_zone"`*)
 printed in error_log, increase to more than (usedSize * 2).
 
-### vhost_traffic_status_dump
-
-| -   | - |
-| --- | --- |
-| **Syntax**  | **vhost_traffic_status_dump** *path* [*period*] |
-| **Default** | - |
-| **Context** | http |
-
-`Description:` Enables the statistics data dump and restore.
-The *path* is a location to dump the statistics data.(e.g. `/var/log/nginx/vts.db`)
-The *period* is a backup cycle time.(Default: 60s)
-It is backed up immediately regardless of the backup cycle if nginx is exited by signal(`SIGKILL`).
 
 ### vhost_traffic_status_display
 
@@ -1763,11 +1730,7 @@ For examples:
   * The observe buckets are [5ms 10ms 50ms 100ms].
 
 `Caveats:` By default, if you do not set this directive, the histogram statistics does not work.
-The restored histograms by `vhost_traffic_status_dump` directive have no affected by changes to the buckets
 by `vhost_traffic_status_histogram_buckets` directive.
-So you must first delete the zone or the dump file before changing the buckets
-by `vhost_traffic_status_histogram_buckets` directive.
-Similar to the above, delete the dump file when using the histogram for the first time.
 
 ### vhost_traffic_status_bypass_limit
 
