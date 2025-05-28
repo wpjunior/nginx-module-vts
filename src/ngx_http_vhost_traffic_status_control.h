@@ -49,8 +49,6 @@ typedef struct {
 
 void ngx_http_vhost_traffic_status_node_control_range_set(
     ngx_http_vhost_traffic_status_control_t *control);
-void ngx_http_vhost_traffic_status_node_status(
-    ngx_http_vhost_traffic_status_control_t *control);
 void ngx_http_vhost_traffic_status_node_delete(
     ngx_http_vhost_traffic_status_control_t *control);
 void ngx_http_vhost_traffic_status_node_reset(
