@@ -10,22 +10,11 @@
 
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_CONTROL_CMD_NONE     0
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_CONTROL_CMD_STATUS   1
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_CONTROL_CMD_DELETE   2
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_CONTROL_CMD_RESET    3
 
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_CONTROL_RANGE_NONE   0
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_CONTROL_RANGE_ALL    1
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_CONTROL_RANGE_GROUP  2
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_CONTROL_RANGE_ZONE   3
-
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_CONTROL "{"                     \
-    "\"processingReturn\":%s,"                                                 \
-    "\"processingCommandString\":\"%V\","                                      \
-    "\"processingGroupString\":\"%V\","                                        \
-    "\"processingZoneString\":\"%V\","                                         \
-    "\"processingCounts\":%ui"                                                 \
-    "}"
-
 
 typedef struct {
     ngx_rbtree_node_t           *node;
@@ -48,8 +37,6 @@ typedef struct {
 
 
 void ngx_http_vhost_traffic_status_node_control_range_set(
-    ngx_http_vhost_traffic_status_control_t *control);
-void ngx_http_vhost_traffic_status_node_status(
     ngx_http_vhost_traffic_status_control_t *control);
 void ngx_http_vhost_traffic_status_node_delete(
     ngx_http_vhost_traffic_status_control_t *control);

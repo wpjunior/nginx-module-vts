@@ -38,11 +38,6 @@
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_NODE_FIND            1
 
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_KEY_SEPARATOR        (u_char) 0x1f
-
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_NONE          0
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_JSON          1
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_HTML          2
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_JSONP         3
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_PROMETHEUS    4
 
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_AVERAGE_METHOD_AMM   0
@@ -50,8 +45,6 @@
 
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_SHM_NAME     "ngx_http_vhost_traffic_status"
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_SHM_SIZE     0xfffff
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_JSONP        "ngx_http_vhost_traffic_status_jsonp_callback"
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_SUM_KEY      "*"
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_AVG_PERIOD   60
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_DUMP_PERIOD  60
 
@@ -261,11 +254,6 @@ typedef struct {
     ngx_str_t                               shm_name;
     ssize_t                                 shm_size;
 
-    ngx_flag_t                              dump;
-    ngx_str_t                               dump_file;
-    ngx_msec_t                              dump_period;
-    ngx_event_t                             dump_event;
-
     ngx_flag_t                              measure_all_status_codes;
     ngx_array_t                             *measure_status_codes;
 } ngx_http_vhost_traffic_status_ctx_t;
@@ -294,11 +282,7 @@ typedef struct {
     /* array of ngx_http_vhost_traffic_status_limit_t */
     ngx_array_t                            *limit_filter_traffics;
 
-    ngx_http_vhost_traffic_status_node_t    stats;
     ngx_msec_t                              start_msec;
-    ngx_flag_t                              format;
-    ngx_str_t                               jsonp;
-    ngx_str_t                               sum_key;
 
     ngx_flag_t                              average_method;
     ngx_msec_t                              average_period;
