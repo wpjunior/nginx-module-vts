@@ -151,13 +151,6 @@ static ngx_command_t ngx_http_vhost_traffic_status_commands[] = {
       0,
       NULL },
 
-    { ngx_string("vhost_traffic_status_display_sum_key"),
-      NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
-      ngx_conf_set_str_slot,
-      NGX_HTTP_LOC_CONF_OFFSET,
-      offsetof(ngx_http_vhost_traffic_status_loc_conf_t, sum_key),
-      NULL },
-
     { ngx_string("vhost_traffic_status_set_by_filter"),
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF
                         |NGX_HTTP_LIF_CONF|NGX_CONF_TAKE2,
@@ -1030,8 +1023,6 @@ ngx_http_vhost_traffic_status_merge_loc_conf(ngx_conf_t *cf, void *parent, void 
     ngx_conf_merge_value(conf->limit_check_duplicate, prev->limit_check_duplicate, 1);
     ngx_conf_merge_ptr_value(conf->filter_vars, prev->filter_vars, NULL);
 
-    ngx_conf_merge_str_value(conf->sum_key, prev->sum_key,
-                             NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_SUM_KEY);
     ngx_conf_merge_value(conf->average_method, prev->average_method,
                          NGX_HTTP_VHOST_TRAFFIC_STATUS_AVERAGE_METHOD_AMM);
     ngx_conf_merge_msec_value(conf->average_period, prev->average_period,

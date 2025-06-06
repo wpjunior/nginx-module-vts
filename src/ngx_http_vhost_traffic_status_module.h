@@ -45,7 +45,6 @@
 
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_SHM_NAME     "ngx_http_vhost_traffic_status"
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_SHM_SIZE     0xfffff
-#define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_SUM_KEY      "*"
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_AVG_PERIOD   60
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_DUMP_PERIOD  60
 
@@ -283,9 +282,7 @@ typedef struct {
     /* array of ngx_http_vhost_traffic_status_limit_t */
     ngx_array_t                            *limit_filter_traffics;
 
-    ngx_http_vhost_traffic_status_node_t    stats;
     ngx_msec_t                              start_msec;
-    ngx_str_t                               sum_key;
 
     ngx_flag_t                              average_method;
     ngx_msec_t                              average_period;

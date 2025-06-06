@@ -39,7 +39,6 @@ Table of Contents
   * [vhost_traffic_status](#vhost_traffic_status)
   * [vhost_traffic_status_zone](#vhost_traffic_status_zone)
   * [vhost_traffic_status_display](#vhost_traffic_status_display)
-  * [vhost_traffic_status_display_sum_key](#vhost_traffic_status_display_sum_key)
   * [vhost_traffic_status_filter](#vhost_traffic_status_filter)
   * [vhost_traffic_status_filter_by_host](#vhost_traffic_status_filter_by_host)
   * [vhost_traffic_status_filter_by_set_key](#vhost_traffic_status_filter_by_set_key)
@@ -569,7 +568,6 @@ See the following directives:
 
 ## Directives
 
-![draw_io_vts_diagram](https://user-images.githubusercontent.com/3648408/42613122-279cdb70-85da-11e8-940e-e348bd8ea861.png "The order of nginx-module-vts module directives")
 
 ### vhost_traffic_status
 
@@ -614,16 +612,6 @@ printed in error_log, increase to more than (usedSize * 2).
 | **Context** | http, server, location |
 
 `Description:` Enables or disables the module display handler.
-
-### vhost_traffic_status_display_sum_key
-
-| -   | - |
-| --- | --- |
-| **Syntax**  | **vhost_traffic_status_display_sum_key** *name* |
-| **Default** | * |
-| **Context** | http, server, location |
-
-`Description:` Sets the sum key string in serverZones field's JSON. The default sum key string is the "*".
 
 ### vhost_traffic_status_filter
 
